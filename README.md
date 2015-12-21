@@ -3,7 +3,7 @@ Version 0.1.0 (pre-release)
 
 Display information from Counter Strike: Global Offensive on a Corsair K series keyboard
 
-##Notice!
+###Notice!
 This is a pre-release!
 
 Only tested this on Windows 10 x64 with a Corsair k70 RGB nordic. Please report compatibility issues
