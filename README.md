@@ -2,7 +2,7 @@
 Version 0.1.0 (pre-release)
 
 ##Installation 
-Download the latest zip from here: [Download](https://github.com/Fire-Proof/cue-csgo/releases/latest)
+Download the latest exe and cfg from here: [Download](https://github.com/Fire-Proof/cue-csgo/releases/latest)
 
 Copy _gamestate_intergration_corsair_cue.cfg_ to:
 
