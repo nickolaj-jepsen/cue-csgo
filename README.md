@@ -1,6 +1,11 @@
 #Gamestate integrations for CUE
 Version 0.1.0 (pre-release)
 
+##Notice!
+This is a pre-release!
+
+Only tested this on Windows 10 x64 with a Corsair k70 RGB nordic. Please report compatibility issues
+
 ##Installation 
 Download the latest exe and cfg from here: [Download](https://github.com/Fire-Proof/cue-csgo/releases/latest)
 
