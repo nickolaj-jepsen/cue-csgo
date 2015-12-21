@@ -40,7 +40,10 @@ def hp_render(hp):
 def flashed_render(value, current_keys):
     if flash_bang_gradient:
         for key, org_color in current_keys.items():
-            yield key, color_gradient(org_color.hex, "white", 16)[value//16]
+            if value > 250:
+                yield key, Color("white")  # Removes redundant calculations
+            elif value > 10:
+                yield key, color_gradient(org_color.hex, "white", 16)[value//16]
     else:
         for key, org_color in current_keys.items():
             if value > 50:
@@ -99,8 +102,6 @@ def post():
     store = request.get_json()
     led_colors = {}
     if "team" in store["player"]:
-        device.request_control(True)
-
         team = store["player"]["team"]
         hp = int(store["player"]["state"]["health"])
         weapons = store["player"]["weapons"]
@@ -114,6 +115,7 @@ def post():
             led_colors[key] = color
         for key, color in dict(flashed_render(flashed, led_colors.copy())).items():
             led_colors[key] = color
+
         for key, color in led_colors.items():
             device.set_led(key, rgb(color))
 
