@@ -1,6 +1,9 @@
 import os
 
 import sys
+from functools import lru_cache
+
+from colour import Color
 
 
 def resource_path(relative_path):
@@ -14,5 +17,6 @@ def resource_path(relative_path):
     return os.path.join(base_path, relative_path)
 
 
-def rgb(color):
-    return [int(x*255) for x in color.rgb]
+@lru_cache(maxsize=200)
+def color_gradient(org_color, new_color, steps):
+    return list(Color(org_color).range_to(Color(new_color), steps))
