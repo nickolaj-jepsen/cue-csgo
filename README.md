@@ -1,5 +1,5 @@
 #Gamestate integrations for CUE
-Version 0.1.0 (pre-release)
+Version 0.2.0 (pre-release)
 
 Display information from Counter Strike: Global Offensive on a Corsair K series keyboard
 
