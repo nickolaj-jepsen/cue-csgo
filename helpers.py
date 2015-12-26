@@ -12,3 +12,7 @@ def resource_path(relative_path):
         base_path = os.path.abspath(".")
 
     return os.path.join(base_path, relative_path)
+
+
+def rgb(color):
+    return [int(x*255) for x in color.rgb]
