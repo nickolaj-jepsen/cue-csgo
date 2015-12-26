@@ -123,7 +123,6 @@ class CueCSGO(object):
             sleep(self.settings["update_interval"])
 
     def start_main_thread(self):
-        1/0
         thread = threading.Thread(target=self.main_loop)
         thread.daemon = True
         thread.start()
