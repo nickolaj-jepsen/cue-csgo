@@ -28,7 +28,10 @@ class Keyboard(object):
         self.sdk = CorsairSDK(resource_path("CUESDK.x64_2013.dll"))
         logging.info("Devices found: " + str(self.sdk.device_count()))
         for x in range(1, self.sdk.device_count()+1):
-            logging.info("information for device {}: {}".format(x-1, self.sdk.device_info(x-1)))
+            try:
+                logging.info("information for device {}: {}".format(x-1, self.sdk.device_info(x-1)))
+            except ValueError:
+                logging.info("Error getting information for device: {}".format(x-1))
 
         self.device = self.sdk.device(device, control=True)
 
