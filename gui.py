@@ -132,6 +132,7 @@ class SettingsDialog(QDialog, Ui_SettingsDialog):
         self.hide()
 
     def closeEvent(self, event):
+        event.ignore()
         self.hide()
 
     def ct_color_picker(self):
