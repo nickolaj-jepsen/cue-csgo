@@ -1,5 +1,5 @@
 #Gamestate integrations for CUE
-Version 0.2.0 (pre-release)
+Version 0.3.0 (pre-release)
 
 Display information from Counter Strike: Global Offensive on a Corsair K series keyboard
 
@@ -13,6 +13,7 @@ Only tested this on Windows 10 x64 with a Corsair k70 RGB nordic. Please report 
 * Color based on team
 * Highlight weapon hotkeys based on current ammo in clip
 * Flashbang effect
+* Bomb effect
 
 Demo video:
 

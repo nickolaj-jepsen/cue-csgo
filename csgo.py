@@ -53,28 +53,22 @@ class CueCSGO(object):
     store = {}
 
     def __init__(self, debug=False, settings=None):
-        self.debug = debug
         if settings is not None:
             self.settings = settings
         else:
             try:
-                with open("settings.json") as settings_file:
+                with open("settings.txt") as settings_file:
                     self.settings = json.load(settings_file)
             except FileNotFoundError:
                 self.settings = DEFAULT_SETTINGS
-                with open('settings.json', 'w') as settings_file:
+                with open('settings.txt', 'w') as settings_file:
                     json.dump(DEFAULT_SETTINGS, settings_file)
 
         logging.info("Starting keyboard access")
         self.keyboard = Keyboard(self.settings["hardware"]["device_id"])
 
-        logging.info("Starting main thread")
-        self.start_main_thread()
-        logging.info("Starting webserver")
-        self.start_webserver()
-
     def _setup_routes(self, app):
-        if self.debug:
+        if self.settings["debug"]:
             @app.route('/')
             def index():
                 return jsonify(self.store)
@@ -101,7 +95,7 @@ class CueCSGO(object):
     def start_webserver(self):
         app = Flask(__name__)
         app = self._setup_routes(app)
-        app.run(debug=self.debug)
+        app.run()
 
     def main_loop(self):
         renders = list(self._setup_renders())
@@ -130,6 +124,11 @@ class CueCSGO(object):
         thread.daemon = True
         thread.start()
 
+    def start(self):
+        logging.info("Starting main thread")
+        self.start_main_thread()
+        logging.info("Starting webserver")
+        self.start_webserver()
 
 if __name__ == '__main__':
     try:

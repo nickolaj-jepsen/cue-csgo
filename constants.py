@@ -1,5 +1,6 @@
 DEFAULT_SETTINGS = {
     "update_interval": 0.01,
+    "debug": False,
     "hardware": {
         "device_id": 0  # only change if use more than one corsair device, and it's interfering with the program
     },
