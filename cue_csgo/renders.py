@@ -1,8 +1,7 @@
 import datetime
 
 from colour import Color
-
-from helpers import color_gradient
+from cue_csgo.helpers import color_gradient
 
 
 class BaseRender(object):

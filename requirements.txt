@@ -2,3 +2,4 @@ cuepy
 colour
 flask
 PySide
+pyinstaller

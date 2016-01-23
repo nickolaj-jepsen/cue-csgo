@@ -1,0 +1,19 @@
+skip_non_tags: true
+
+environment:
+  matrix:
+    - PYTHON: "C:\\Python34"
+      PYTHON_VERSION: "3.4.x"
+      PYTHON_ARCH: "32"
+
+    - PYTHON: "C:\\Python34-x64"
+      PYTHON_VERSION: "3.4.x"
+      PYTHON_ARCH: "64"
+
+init:
+  - "%PYTHON%/python --version"
+
+install:
+  - "%PYTHON%/python -m pip install -r requirements.txt"
+  - "cd build-script"
+  - "%PYTHON%/python -m pyinstaller build.spec"

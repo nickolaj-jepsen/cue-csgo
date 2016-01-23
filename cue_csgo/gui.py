@@ -1,14 +1,14 @@
 #!/usr/bin/python
 import json
-import sys
 import os
-import logging
+import sys
 
 from PySide.QtCore import *
 from PySide.QtGui import *
-from csgo import CueCSGO
-from helpers import resource_path, setup_logging
-from settings_dialog import Ui_SettingsDialog
+
+from cue_csgo.csgo import CueCSGO
+from cue_csgo.helpers import resource_path
+from cue_csgo.ui.settings_dialog import Ui_SettingsDialog
 
 
 class CUEThread(QThread):
@@ -148,15 +148,9 @@ class SettingsDialog(QDialog, Ui_SettingsDialog):
             self.background_line_edit_t_color.setText(color.name().upper())
 
 
-def main():
-    try:
-        app = QApplication(sys.argv)
-        w = QWidget()
-        tray_icon = SystemTrayIcon(QIcon(resource_path("cue-cs.xpm")), w)
-        tray_icon.show()
-        app.exec_()
-    except Exception:
-        logging.exception()
-
-if __name__ == '__main__':
-    main()
+def start_app():
+    app = QApplication(sys.argv)
+    w = QWidget()
+    tray_icon = SystemTrayIcon(QIcon(resource_path("cue_csgo\\resources\\cue-cs.xpm")), w)
+    tray_icon.show()
+    app.exec_()

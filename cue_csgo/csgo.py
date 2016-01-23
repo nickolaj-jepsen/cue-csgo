@@ -4,18 +4,16 @@ import sys
 import threading
 from time import sleep
 
+from cue_csgo.constants import DEFAULT_SETTINGS
 from cuepy import CorsairSDK
 from flask import Flask, request, jsonify
+from cue_csgo.helpers import resource_path, setup_logging
 
-from constants import DEFAULT_SETTINGS
-from helpers import resource_path, setup_logging
-
-from renders import BackgroundRender, BombRender, FlashbangRender, HpRender, WeaponRender
-
+from cue_csgo.renders import *
 
 class Keyboard(object):
     def __init__(self, device):
-        self.sdk = CorsairSDK(resource_path("CUESDK.x64_2013.dll"))
+        self.sdk = CorsairSDK(resource_path("cue_csgo\\resources\\CUESDK.x64_2013.dll"))
         logging.info("Devices found: " + str(self.sdk.device_count()))
         for x in range(1, self.sdk.device_count()+1):
             try:
@@ -53,7 +51,9 @@ class CueCSGO(object):
                 self.settings = DEFAULT_SETTINGS
                 with open('settings.txt', 'w') as settings_file:
                     json.dump(DEFAULT_SETTINGS, settings_file)
-        setup_logging(debug=self.settings["debug"])
+
+        setup_logging(debug=self.settings["debug"])  # TODO: Refactor this somewhere else
+
         logging.info("Starting keyboard access")
         self.keyboard = Keyboard(self.settings["hardware"]["device_id"])
 
