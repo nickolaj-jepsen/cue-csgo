@@ -6,8 +6,8 @@ import logging
 
 from PySide.QtCore import *
 from PySide.QtGui import *
-from csgo import CueCSGO, setup_logging
-from helpers import resource_path
+from csgo import CueCSGO
+from helpers import resource_path, setup_logging
 from settings_dialog import Ui_SettingsDialog
 
 
@@ -149,7 +149,6 @@ class SettingsDialog(QDialog, Ui_SettingsDialog):
 
 
 def main():
-    setup_logging(debug=True)
     try:
         app = QApplication(sys.argv)
         w = QWidget()

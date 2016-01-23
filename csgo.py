@@ -1,26 +1,16 @@
 import json
+import logging
 import sys
 import threading
-import logging
 from time import sleep
 
 from cuepy import CorsairSDK
 from flask import Flask, request, jsonify
 
 from constants import DEFAULT_SETTINGS
-from helpers import resource_path
+from helpers import resource_path, setup_logging
 
 from renders import BackgroundRender, BombRender, FlashbangRender, HpRender, WeaponRender
-
-
-def setup_logging(debug=False):
-    if not debug:
-        FORMAT = '%(asctime)-15s || %(message)s'
-        logging.basicConfig(filename="CUE_gamestate.log", format=FORMAT, level=logging.INFO, filemode="w")
-        log = logging.getLogger("werkzeug")
-        log.setLevel(logging.WARNING)
-    else:
-        logging.basicConfig(level=logging.INFO)
 
 
 class Keyboard(object):
@@ -32,7 +22,6 @@ class Keyboard(object):
                 logging.info("information for device {}: {}".format(x-1, self.sdk.device_info(x-1)))
             except ValueError:
                 logging.info("Error getting information for device: {}".format(x-1))
-
         self.device = self.sdk.device(device, control=True)
 
         self.device_info = self.device.device_info()
@@ -53,6 +42,7 @@ class CueCSGO(object):
     store = {}
 
     def __init__(self, debug=False, settings=None):
+
         if settings is not None:
             self.settings = settings
         else:
@@ -63,7 +53,7 @@ class CueCSGO(object):
                 self.settings = DEFAULT_SETTINGS
                 with open('settings.txt', 'w') as settings_file:
                     json.dump(DEFAULT_SETTINGS, settings_file)
-
+        setup_logging(debug=self.settings["debug"])
         logging.info("Starting keyboard access")
         self.keyboard = Keyboard(self.settings["hardware"]["device_id"])
 

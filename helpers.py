@@ -1,3 +1,4 @@
+import logging
 import os
 
 import sys
@@ -20,3 +21,13 @@ def resource_path(relative_path):
 @lru_cache(maxsize=200)
 def color_gradient(org_color, new_color, steps):
     return list(Color(org_color).range_to(Color(new_color), steps))
+
+
+def setup_logging(debug=False):
+    if not debug:
+        format_ = '%(asctime)-15s || %(message)s'
+        logging.basicConfig(filename="CUE_gamestate.log", format=format_, level=logging.INFO, filemode="w")
+        log = logging.getLogger("werkzeug")
+        log.setLevel(logging.WARNING)
+    else:
+        logging.basicConfig(level=logging.INFO)
