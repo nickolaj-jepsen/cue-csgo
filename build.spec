@@ -3,7 +3,7 @@
 block_cipher = None
 
 
-a = Analysis(['..\\cue-csgo.py'],
+a = Analysis(['cue-csgo.py'],
              pathex=['C:\\Users\\nicko\\Google Drev\\cosairlib'],
              binaries=None,
              datas=None,
@@ -15,8 +15,8 @@ a = Analysis(['..\\cue-csgo.py'],
              win_private_assemblies=None,
              cipher=block_cipher)
 
-a.datas += [('..\\cue_csgo\\resources\\CUESDK.x64_2013.dll','..\\cue_csgo\\resources\\CUESDK.x64_2013.dll','DATA')]
-a.datas += [('..\\cue_csgo\\resources\\cue-cs.xpm','..\\cue_csgo\\resources\\cue-cs.xpm','DATA')]
+a.datas += [('cue_csgo\\resources\\CUESDK.x64_2013.dll','cue_csgo\\resources\\CUESDK.x64_2013.dll','DATA')]
+a.datas += [('cue_csgo\\resources\\cue-cs.xpm','cue_csgo\\resources\\cue-cs.xpm','DATA')]
 
 pyz = PYZ(a.pure, a.zipped_data,
              cipher=block_cipher)
