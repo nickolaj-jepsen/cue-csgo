@@ -52,8 +52,6 @@ class CueCSGO(object):
                 with open('settings.txt', 'w') as settings_file:
                     json.dump(DEFAULT_SETTINGS, settings_file)
 
-        setup_logging(debug=self.settings["debug"])  # TODO: Refactor this somewhere else
-
         logging.info("Starting keyboard access")
         self.keyboard = Keyboard(self.settings["hardware"]["device_id"])
 
@@ -85,7 +83,7 @@ class CueCSGO(object):
     def start_webserver(self):
         app = Flask(__name__)
         app = self._setup_routes(app)
-        app.run()
+        app.run(port=43555)
 
     def main_loop(self):
         renders = list(self._setup_renders())
