@@ -20,7 +20,7 @@ class Keyboard(object):
                 logging.info("information for device {}: {}".format(x-1, self.sdk.device_info(x-1)))
             except ValueError:
                 logging.info("Error getting information for device: {}".format(x-1))
-        self.device = self.sdk.device(device, control=True)
+        self.device = self.sdk.device(device, control=False)
 
         self.device_info = self.device.device_info()
         # TODO: add device specific layouts
