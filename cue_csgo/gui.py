@@ -137,7 +137,9 @@ class SettingsDialog(QDialog, Ui_SettingsDialog):
         self.settings["renders"]["active"] = enabled_renders
         self.settings["renders"]["settings"]["BombRender"]["explode_time"] = self.bomb_timer.value()
         self.settings["renders"]["settings"]["FlashbangRender"]["gradient"] = self.flashbang_gradient.isChecked()
-        self.settings["renders"]["settings"]["SmokeRender"]["gradient"] = self.flashbang_gradient.isChecked()
+        self.settings["renders"]["settings"]["BackgroundRender"]["ct_color"] = self.background_line_edit_ct_color.text()
+        self.settings["renders"]["settings"]["BackgroundRender"]["t_color"] = self.background_line_edit_t_color.text()
+
 
         with open('settings.txt', 'w') as settings_file:
             json.dump(self.settings, settings_file)
