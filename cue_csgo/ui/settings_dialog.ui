@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>282</width>
-    <height>503</height>
+    <height>582</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -296,6 +296,19 @@
       <string>Flashbang</string>
      </property>
      <layout class="QFormLayout" name="formLayout_6">
+      <property name="fieldGrowthPolicy">
+       <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+      </property>
+      <item row="0" column="1">
+       <layout class="QHBoxLayout" name="horizontalLayout_13"/>
+      </item>
+      <item row="1" column="0">
+       <widget class="QCheckBox" name="flashbang_gradient">
+        <property name="text">
+         <string>Gradient</string>
+        </property>
+       </widget>
+      </item>
       <item row="0" column="0">
        <widget class="QCheckBox" name="flashbang_enabled">
         <property name="text">
@@ -303,11 +316,27 @@
         </property>
        </widget>
       </item>
-      <item row="0" column="1">
-       <layout class="QHBoxLayout" name="horizontalLayout_13"/>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="groupBox_2">
+     <property name="title">
+      <string>Smoke</string>
+     </property>
+     <layout class="QFormLayout" name="formLayout_8">
+      <property name="fieldGrowthPolicy">
+       <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+      </property>
+      <item row="0" column="0">
+       <widget class="QCheckBox" name="smoke_enabled">
+        <property name="text">
+         <string>Enabled *</string>
+        </property>
+       </widget>
       </item>
       <item row="1" column="0">
-       <widget class="QCheckBox" name="flashbang_gradient">
+       <widget class="QCheckBox" name="smoke_gradient">
         <property name="text">
          <string>Gradient</string>
         </property>

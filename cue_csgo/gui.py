@@ -6,9 +6,11 @@ import sys
 from PySide.QtCore import *
 from PySide.QtGui import *
 
+from cue_csgo.constants import DEFAULT_SETTINGS
 from cue_csgo.csgo import CueCSGO
 from cue_csgo.helpers import resource_path
 from cue_csgo.ui.settings_dialog import Ui_SettingsDialog
+from cue_csgo.renders import all_renders
 
 
 class CUEThread(QThread):
@@ -81,6 +83,16 @@ class SettingsDialog(QDialog, Ui_SettingsDialog):
         super(SettingsDialog, self).show()
         if settings is not None:
             self.settings = settings
+
+            # Make sure all renders has a settings dict, if not, use default settings
+            for render in all_renders:
+                name = render.__name__
+                if self.settings["renders"]["settings"].get(name, None) is None:
+                    if DEFAULT_SETTINGS["renders"]["settings"].get(name, None) is not None:
+                        self.settings["renders"]["settings"][name] = DEFAULT_SETTINGS["renders"]["settings"][name]
+                    else:
+                        self.settings["renders"]["settings"][name] = {}
+
             self.general_update_interval.setValue(self.settings["update_interval"])
 
             background_settings = self.settings["renders"]["settings"]["BackgroundRender"]
@@ -100,9 +112,12 @@ class SettingsDialog(QDialog, Ui_SettingsDialog):
                     self.bomb_enabled.setChecked(True)
                 if render == "FlashbangRender":
                     self.flashbang_enabled.setChecked(True)
+                if render == "SmokeRender":
+                    self.smoke_enabled.setChecked(True)
 
             self.bomb_timer.setValue(self.settings["renders"]["settings"]["BombRender"]["explode_time"])
             self.flashbang_gradient.setChecked(self.settings["renders"]["settings"]["FlashbangRender"]["gradient"])
+            self.smoke_gradient.setChecked(self.settings["renders"]["settings"]["SmokeRender"]["gradient"])
 
     def new_settings(self):
         self.settings["update_interval"] = self.general_update_interval.value()
@@ -116,10 +131,13 @@ class SettingsDialog(QDialog, Ui_SettingsDialog):
             enabled_renders.append("BombRender")
         if self.flashbang_enabled.isChecked():
             enabled_renders.append("FlashbangRender")
+        if self.smoke_enabled.isChecked():
+            enabled_renders.append("SmokeRender")
 
         self.settings["renders"]["active"] = enabled_renders
         self.settings["renders"]["settings"]["BombRender"]["explode_time"] = self.bomb_timer.value()
         self.settings["renders"]["settings"]["FlashbangRender"]["gradient"] = self.flashbang_gradient.isChecked()
+        self.settings["renders"]["settings"]["SmokeRender"]["gradient"] = self.flashbang_gradient.isChecked()
 
         with open('settings.txt', 'w') as settings_file:
             json.dump(self.settings, settings_file)

@@ -137,3 +137,24 @@ class FlashbangRender(BaseRender):
             for key, org_color in keyboard_color.items():
                 if flashed_value > 50:
                     yield key, Color("white")
+
+
+class SmokeRender(BaseRender):
+    require_color_info = True
+
+    def render(self, game_state, keyboard_color=None):
+        smoked_value = int(game_state["player"]["state"]["smoked"])
+
+        if self.settings["gradient"]:
+            for key, org_color in keyboard_color.items():
+                if smoked_value > 250:
+                    yield key, Color("Grey")  # Removes redundant calculations
+                elif smoked_value > 10:
+                    yield key, color_gradient(org_color.hex, "Grey", 16)[smoked_value//16]
+        else:
+            for key, org_color in keyboard_color.items():
+                if smoked_value > 50:
+                    yield key, Color("Grey")
+
+
+all_renders = (BackgroundRender, HpRender, WeaponRender, BombRender, FlashbangRender, SmokeRender)

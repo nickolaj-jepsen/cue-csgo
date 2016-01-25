@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'settings_dialog.ui'
 #
-# Created: Wed Dec 30 17:12:38 2015
+# Created: Sun Jan 24 15:32:00 2016
 #      by: pyside-uic 0.2.15 running on PySide 1.2.2
 #
 # WARNING! All changes made in this file will be lost!
@@ -12,7 +12,7 @@ from PySide import QtCore, QtGui
 class Ui_SettingsDialog(object):
     def setupUi(self, SettingsDialog):
         SettingsDialog.setObjectName("SettingsDialog")
-        SettingsDialog.resize(282, 503)
+        SettingsDialog.resize(282, 582)
         self.verticalLayout_2 = QtGui.QVBoxLayout(SettingsDialog)
         self.verticalLayout_2.setObjectName("verticalLayout_2")
         self.groupBox = QtGui.QGroupBox(SettingsDialog)
@@ -133,17 +133,30 @@ class Ui_SettingsDialog(object):
         self.groupBox_7 = QtGui.QGroupBox(SettingsDialog)
         self.groupBox_7.setObjectName("groupBox_7")
         self.formLayout_6 = QtGui.QFormLayout(self.groupBox_7)
+        self.formLayout_6.setFieldGrowthPolicy(QtGui.QFormLayout.AllNonFixedFieldsGrow)
         self.formLayout_6.setObjectName("formLayout_6")
-        self.flashbang_enabled = QtGui.QCheckBox(self.groupBox_7)
-        self.flashbang_enabled.setObjectName("flashbang_enabled")
-        self.formLayout_6.setWidget(0, QtGui.QFormLayout.LabelRole, self.flashbang_enabled)
         self.horizontalLayout_13 = QtGui.QHBoxLayout()
         self.horizontalLayout_13.setObjectName("horizontalLayout_13")
         self.formLayout_6.setLayout(0, QtGui.QFormLayout.FieldRole, self.horizontalLayout_13)
         self.flashbang_gradient = QtGui.QCheckBox(self.groupBox_7)
         self.flashbang_gradient.setObjectName("flashbang_gradient")
         self.formLayout_6.setWidget(1, QtGui.QFormLayout.LabelRole, self.flashbang_gradient)
+        self.flashbang_enabled = QtGui.QCheckBox(self.groupBox_7)
+        self.flashbang_enabled.setObjectName("flashbang_enabled")
+        self.formLayout_6.setWidget(0, QtGui.QFormLayout.LabelRole, self.flashbang_enabled)
         self.verticalLayout_2.addWidget(self.groupBox_7)
+        self.groupBox_2 = QtGui.QGroupBox(SettingsDialog)
+        self.groupBox_2.setObjectName("groupBox_2")
+        self.formLayout_8 = QtGui.QFormLayout(self.groupBox_2)
+        self.formLayout_8.setFieldGrowthPolicy(QtGui.QFormLayout.AllNonFixedFieldsGrow)
+        self.formLayout_8.setObjectName("formLayout_8")
+        self.smoke_enabled = QtGui.QCheckBox(self.groupBox_2)
+        self.smoke_enabled.setObjectName("smoke_enabled")
+        self.formLayout_8.setWidget(0, QtGui.QFormLayout.LabelRole, self.smoke_enabled)
+        self.smoke_gradient = QtGui.QCheckBox(self.groupBox_2)
+        self.smoke_gradient.setObjectName("smoke_gradient")
+        self.formLayout_8.setWidget(1, QtGui.QFormLayout.LabelRole, self.smoke_gradient)
+        self.verticalLayout_2.addWidget(self.groupBox_2)
         spacerItem4 = QtGui.QSpacerItem(20, 40, QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Expanding)
         self.verticalLayout_2.addItem(spacerItem4)
         self.horizontalLayout_2 = QtGui.QHBoxLayout()
@@ -180,8 +193,11 @@ class Ui_SettingsDialog(object):
         self.bomb_enabled.setText(QtGui.QApplication.translate("SettingsDialog", "Enabled *", None, QtGui.QApplication.UnicodeUTF8))
         self.label_6.setText(QtGui.QApplication.translate("SettingsDialog", "Bomb timer:", None, QtGui.QApplication.UnicodeUTF8))
         self.groupBox_7.setTitle(QtGui.QApplication.translate("SettingsDialog", "Flashbang", None, QtGui.QApplication.UnicodeUTF8))
-        self.flashbang_enabled.setText(QtGui.QApplication.translate("SettingsDialog", "Enabled *", None, QtGui.QApplication.UnicodeUTF8))
         self.flashbang_gradient.setText(QtGui.QApplication.translate("SettingsDialog", "Gradient", None, QtGui.QApplication.UnicodeUTF8))
+        self.flashbang_enabled.setText(QtGui.QApplication.translate("SettingsDialog", "Enabled *", None, QtGui.QApplication.UnicodeUTF8))
+        self.groupBox_2.setTitle(QtGui.QApplication.translate("SettingsDialog", "Smoke", None, QtGui.QApplication.UnicodeUTF8))
+        self.smoke_enabled.setText(QtGui.QApplication.translate("SettingsDialog", "Enabled *", None, QtGui.QApplication.UnicodeUTF8))
+        self.smoke_gradient.setText(QtGui.QApplication.translate("SettingsDialog", "Gradient", None, QtGui.QApplication.UnicodeUTF8))
         self.label_2.setText(QtGui.QApplication.translate("SettingsDialog", "* Restart is needed", None, QtGui.QApplication.UnicodeUTF8))
         self.button_save_settings.setText(QtGui.QApplication.translate("SettingsDialog", "Save settings", None, QtGui.QApplication.UnicodeUTF8))
         self.button_cancel_settings.setText(QtGui.QApplication.translate("SettingsDialog", "Abort", None, QtGui.QApplication.UnicodeUTF8))

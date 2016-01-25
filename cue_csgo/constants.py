@@ -5,7 +5,7 @@ DEFAULT_SETTINGS = {
         "device_id": 0  # only change if use more than one corsair device, and it's interfering with the program
     },
     "renders": {
-        "active": ["BackgroundRender", "HpRender", "WeaponRender", "BombRender", "FlashbangRender"],
+        "active": ["BackgroundRender", "HpRender", "WeaponRender", "BombRender", "SmokeRender", "FlashbangRender"],
         "settings": {
             "BackgroundRender": {
                 "ct_color": "#5C7793",
@@ -15,6 +15,9 @@ DEFAULT_SETTINGS = {
                 "explode_time": 40
             },
             "FlashbangRender": {
+                "gradient": True
+            },
+            "SmokeRender": {
                 "gradient": True
             }
         }
