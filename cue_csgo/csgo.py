@@ -39,6 +39,7 @@ class Keyboard(object):
 
 class CueCSGO(object):
     store = {}
+    first_connection = False
 
     def __init__(self, debug=False, settings=None):
 
@@ -73,6 +74,9 @@ class CueCSGO(object):
 
         @app.route('/post', methods=["POST"])
         def post():
+            if not self.first_connection:
+                logging.info("First message from CS:GO received")
+                self.first_connection = True
             self.store = request.get_json()
             return ''
 
