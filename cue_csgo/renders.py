@@ -1,4 +1,5 @@
 import datetime
+import random
 
 from colour import Color
 from cue_csgo.helpers import color_gradient
@@ -157,4 +158,42 @@ class SmokeRender(BaseRender):
                     yield key, Color("Grey")
 
 
-all_renders = (BackgroundRender, HpRender, WeaponRender, BombRender, FlashbangRender, SmokeRender)
+class FireRender(BaseRender):
+
+    def __init__(self, *args, **kwargs):
+        super(FireRender, self).__init__(*args, **kwargs)
+        leds = self.keyboard.device.led_positions()["pLedPosition"]
+        self.lowest_row = [x for x, y in leds.items() if y["top"] > 125]
+        self.second_lowest_row = [x for x, y in leds.items() if 125 > y["top"] > 105]
+        self.third_lowest_row = [x for x, y in leds.items() if 105 > y["top"] > 87]
+        self.last_update = datetime.datetime.now()
+        self.last_update_dict = {}
+
+    def render(self, game_state):
+        burning_value = int(game_state["player"]["state"]["burning"])
+
+        if burning_value >= 255:
+            if self.last_update < datetime.datetime.now() - datetime.timedelta(microseconds=90000):
+                self.last_update_dict = {}
+                for key in self.lowest_row:
+                        self.last_update_dict[key] = Color("red")
+                for key in self.second_lowest_row:
+                    if random.randint(0, 100) > 40:
+                        self.last_update_dict[key] = Color("red")
+                for key in self.third_lowest_row:
+                    if random.randint(0, 100) > 80:
+                        self.last_update_dict[key] = Color("red")
+                self.last_update = datetime.datetime.now()
+
+            for key, value in self.last_update_dict.items():
+                yield key, value
+
+
+class ChatRender(BaseRender):
+    def render(self, game_state):
+        if game_state["player"]["activity"] == "textinput":
+            for x in self.keyboard.all_leds:
+                yield x, Color(self.settings["color"])
+
+
+all_renders = (BackgroundRender, HpRender, WeaponRender, BombRender, FlashbangRender, SmokeRender, FireRender, ChatRender)

@@ -11,6 +11,7 @@ from cue_csgo.helpers import resource_path, setup_logging
 
 from cue_csgo.renders import *
 
+
 class Keyboard(object):
     def __init__(self, device):
         self.sdk = CorsairSDK(resource_path("cue_csgo\\resources\\CUESDK.x64_2013.dll"))
@@ -21,7 +22,6 @@ class Keyboard(object):
             except ValueError:
                 logging.info("Error getting information for device: {}".format(x-1))
         self.device = self.sdk.device(device, control=False)
-
         self.device_info = self.device.device_info()
         # TODO: add device specific layouts
         # if self.device_info["model"] == "K70 RGB" and self.device_info["logicalLayout"] == 3:
