@@ -22,6 +22,7 @@ class Keyboard(object):
             except ValueError:
                 logging.info("Error getting information for device: {}".format(x-1))
         self.device = self.sdk.device(device, control=False)
+        logging.info("leds for keyboard: {}".format(str(self.device.led_positions()["pLedPosition"])))
         self.device_info = self.device.device_info()
         # TODO: add device specific layouts
         # if self.device_info["model"] == "K70 RGB" and self.device_info["logicalLayout"] == 3:
