@@ -53,6 +53,15 @@ class CueCSGO(object):
                 with open('settings.txt', 'w') as settings_file:
                     json.dump(DEFAULT_SETTINGS, settings_file)
 
+        # Make sure all renders has a settings dict, if not, use default settings
+        for render in all_renders:
+            name = render.__name__
+            if self.settings["renders"]["settings"].get(name, None) is None:
+                if DEFAULT_SETTINGS["renders"]["settings"].get(name, None) is not None:
+                    self.settings["renders"]["settings"][name] = DEFAULT_SETTINGS["renders"]["settings"][name]
+                else:
+                    self.settings["renders"]["settings"][name] = {}
+
         logging.info("Starting keyboard access")
         self.keyboard = Keyboard(self.settings["hardware"]["device_id"])
 

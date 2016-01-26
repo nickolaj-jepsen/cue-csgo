@@ -84,15 +84,6 @@ class SettingsDialog(QDialog, Ui_SettingsDialog):
         if settings is not None:
             self.settings = settings
 
-            # Make sure all renders has a settings dict, if not, use default settings
-            for render in all_renders:
-                name = render.__name__
-                if self.settings["renders"]["settings"].get(name, None) is None:
-                    if DEFAULT_SETTINGS["renders"]["settings"].get(name, None) is not None:
-                        self.settings["renders"]["settings"][name] = DEFAULT_SETTINGS["renders"]["settings"][name]
-                    else:
-                        self.settings["renders"]["settings"][name] = {}
-
             self.general_update_interval.setValue(self.settings["update_interval"])
 
             background_settings = self.settings["renders"]["settings"]["BackgroundRender"]
@@ -102,6 +93,10 @@ class SettingsDialog(QDialog, Ui_SettingsDialog):
             self.background_line_edit_t_color.setText(background_settings["t_color"])
             self.background_button_t_color.setStyleSheet("background-color: {}"
                                                          .format(background_settings["t_color"]))
+
+            chat_color = self.settings["renders"]["settings"]["ChatRender"]["color"]
+            self.chat_line_edit_color.setText(chat_color)
+            self.chat_button_color.setStyleSheet("background-color: {}".format(chat_color))
 
             for render in self.settings["renders"]["active"]:
                 if render == "HpRender":
@@ -114,6 +109,10 @@ class SettingsDialog(QDialog, Ui_SettingsDialog):
                     self.flashbang_enabled.setChecked(True)
                 if render == "SmokeRender":
                     self.smoke_enabled.setChecked(True)
+                if render == "FireRender":
+                    self.fire_enabled.setChecked(True)
+                if render == "ChatRender":
+                    self.chat_enabled.setChecked(True)
 
             self.bomb_timer.setValue(self.settings["renders"]["settings"]["BombRender"]["explode_time"])
             self.flashbang_gradient.setChecked(self.settings["renders"]["settings"]["FlashbangRender"]["gradient"])
@@ -129,17 +128,21 @@ class SettingsDialog(QDialog, Ui_SettingsDialog):
             enabled_renders.append("WeaponRender")
         if self.bomb_enabled.isChecked():
             enabled_renders.append("BombRender")
-        if self.flashbang_enabled.isChecked():
-            enabled_renders.append("FlashbangRender")
         if self.smoke_enabled.isChecked():
             enabled_renders.append("SmokeRender")
+        if self.flashbang_enabled.isChecked():
+            enabled_renders.append("FlashbangRender")
+        if self.fire_enabled.isChecked():
+            enabled_renders.append("FireRender")
+        if self.chat_enabled.isChecked():
+            enabled_renders.append("ChatRender")
 
         self.settings["renders"]["active"] = enabled_renders
         self.settings["renders"]["settings"]["BombRender"]["explode_time"] = self.bomb_timer.value()
         self.settings["renders"]["settings"]["FlashbangRender"]["gradient"] = self.flashbang_gradient.isChecked()
         self.settings["renders"]["settings"]["BackgroundRender"]["ct_color"] = self.background_line_edit_ct_color.text()
         self.settings["renders"]["settings"]["BackgroundRender"]["t_color"] = self.background_line_edit_t_color.text()
-
+        self.settings["renders"]["settings"]["ChatRender"]["color"] = self.chat_line_edit_color.text()
 
         with open('settings.txt', 'w') as settings_file:
             json.dump(self.settings, settings_file)
