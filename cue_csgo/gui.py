@@ -76,6 +76,8 @@ class SettingsDialog(QDialog, Ui_SettingsDialog):
         self.background_button_ct_color.clicked.connect(self.ct_color_picker)
         self.background_button_t_color.clicked.connect(self.t_color_picker)
 
+        self.chat_button_color.clicked.connect(self.chat_color_picker)
+
         self.button_save_settings.clicked.connect(self.set_settings)
         self.button_cancel_settings.clicked.connect(self.hide)
 
@@ -169,6 +171,12 @@ class SettingsDialog(QDialog, Ui_SettingsDialog):
         if color != QColor():
             self.background_button_t_color.setStyleSheet("background-color: {}" .format(color.name()))
             self.background_line_edit_t_color.setText(color.name().upper())
+
+    def chat_color_picker(self):
+        color = QColorDialog.getColor()
+        if color != QColor():
+            self.chat_button_color.setStyleSheet("background-color: {}" .format(color.name()))
+            self.chat_line_edit_color.setText(color.name().upper())
 
 
 def start_app():
