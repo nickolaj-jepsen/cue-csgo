@@ -7,7 +7,7 @@ from time import sleep
 from cue_csgo.constants import DEFAULT_SETTINGS
 from cuepy import CorsairSDK
 from flask import Flask, request, jsonify
-from cue_csgo.helpers import resource_path, setup_logging
+from cue_csgo.helpers import resource_path, setup_logging, csgo_running
 
 from cue_csgo.renders import *
 
@@ -102,9 +102,24 @@ class CueCSGO(object):
     def main_loop(self):
         renders = list(self._setup_renders())
         previous_dict = {}
+        active = False
         while True:
-            if self.store != {}:
-                if "team" in self.store["player"]:
+            if not csgo_running():
+                if active:
+                    self.keyboard.device.reload()
+                    active = False
+                    previous_dict = {}
+                sleep(5)
+
+            elif self.store != {}:
+                if self.store["player"]["activity"] == "menu":
+                    if active:
+                        self.keyboard.device.reload()
+                        active = False
+                        previous_dict = {}  # Reset cache
+
+                elif "team" in self.store["player"]:
+                    active = True
                     led_colors = {}
                     for render in renders:
                         if render.require_color_info:

@@ -1,6 +1,7 @@
 import logging
 import os
 import platform
+import win32ui
 
 import sys
 from functools import lru_cache
@@ -43,3 +44,12 @@ def setup_logging(debug=False, os_info=True):
         else:
             logging.info("System Arch\t\t= {}".format("32 bit"))
         logging.info("Python version\t= {}".format(sys.version))
+
+
+def csgo_running():
+    try:
+        win32ui.FindWindow("Valve001", None)
+    except win32ui.error:
+        return False
+    else:
+        return True
