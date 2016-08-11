@@ -1,3 +1,5 @@
+# This project is discontinued, a better alternative can be found at [Aurora](https://github.com/antonpup/Aurora) 
+
 #Gamestate integrations for CUE
 Version 0.3.0 (pre-release)
 
